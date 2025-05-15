@@ -32,6 +32,8 @@ class MainPanelProvider extends PanelProvider
             ->login()
             ->databaseNotifications()
             ->brandName("Arjuna Lingga Property")
+            ->brandLogo(asset('images/logo/logo-poltek.png'))
+            ->brandLogoHeight('2rem')
             ->favicon(asset('favicon.ico'))
             ->colors([
                 'primary' => Color::Sky,
@@ -67,8 +69,8 @@ class MainPanelProvider extends PanelProvider
             ->plugins([
                 GlobalSearchModalPlugin::make(),
                 EasyFooterPlugin::make()
-                    ->withFooterPosition('sidebar.footer')
-                    ->withSentence('Ajuna Lingga Property')
+                    ->withFooterPosition('main.footer.end')
+                    ->withSentence('Arjuna Lingga Property')
                     ->withLinks([
                         ['title' => 'Instagram', 'url' => 'https://example.com/about'],
                         ['title' => 'Facebook', 'url' => 'https://example.com/cgv'],
