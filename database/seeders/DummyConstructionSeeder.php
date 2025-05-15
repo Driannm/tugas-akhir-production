@@ -1,4 +1,5 @@
 <?php
+
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
@@ -15,7 +16,6 @@ class DummyConstructionSeeder extends Seeder
         $constructionTypes = ['Gedung Perkantoran', 'Jalan Raya', 'Jembatan', 'Apartemen', 'Gudang', 'Pabrik', 'Taman Kota'];
         $locations = ['Jakarta Selatan', 'Bandung Barat', 'Surabaya Timur', 'Medan Kota', 'Yogyakarta Utara'];
         $clients = ['PT Wijaya Karya', 'PT Adhi Karya', 'PT PP (Persero)', 'PT Nindya Karya', 'PT Brantas Abipraya'];
-
         $projectNames = [
             'Pembangunan Gedung Kantor Walikota',
             'Rehabilitasi Jalan Nasional Lintas Timur',
@@ -27,21 +27,13 @@ class DummyConstructionSeeder extends Seeder
             'Proyek Infrastruktur Kawasan Industri',
             'Pembangunan Jalan Tol Cikampek',
             'Peningkatan Drainase dan Trotoar Kota',
-            'Pembangunan Stadion Olahraga Nasional', 
-            'Pembangunan Pusat Perbelanjaan Modern', 
-            'Rehabilitasi Jaringan Jalan Kota Jakarta', 
+            'Pembangunan Stadion Olahraga Nasional',
+            'Pembangunan Pusat Perbelanjaan Modern',
+            'Rehabilitasi Jaringan Jalan Kota Jakarta',
         ];
 
-        if (User::where('is_admin', 1)->count() === 0) {
-            User::create([
-                'name' => 'Admin Supervisor',
-                'email' => 'admin@supervisor.com',
-                'password' => bcrypt('password'),
-                'is_admin' => 1,
-            ]);
-        }
-
-        $supervisors = User::where('is_admin', 1)->pluck('id')->toArray();
+        // Ambil semua user yang punya role 'supervisor'
+        $supervisors = User::role('supervisor')->pluck('id')->toArray();
 
         foreach ($projectNames as $name) {
             $start = Carbon::now()->subDays(rand(14, 90));

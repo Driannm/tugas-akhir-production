@@ -13,11 +13,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        User::factory(100)->create();
+        $this->call([
+            ShieldSetupSeeder::class,
+            DummyMaterialSeeder::class,
+            DummyConstructionSeeder::class,
+            DummyWorkerSeeder::class,
+            DummyEquipmentSeeder::class,
+        ]);
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
+        // User::create([
+        //     'name' => 'Superadmin - Drian',
+        //     'email' => 'superadmin@ajunaproperty.com',
+        //     'password' => bcrypt('superadmin1'),
+        // ]);
+
+        // User::create([
+        //     'name' => 'Supervisor - Adnan',
+        //     'email' => 'supervisor1@ajunaproperty.com',
+        //     'password' => bcrypt('supervisor1'),
+        // ]);
+
+        // User::create([
+        //     'name' => 'Supervisor - Khafid',
+        //     'email' => 'supervisor2@ajunaproperty.com',
+        //     'password' => bcrypt('supervisor2'),
         // ]);
     }
 }
