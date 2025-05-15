@@ -20,6 +20,8 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Devonab\FilamentEasyFooter\EasyFooterPlugin;
 use CharrafiMed\GlobalSearchModal\GlobalSearchModalPlugin;
+use Filament\View\PanelsRenderHook;
+use Illuminate\Contracts\View\View;
 
 class MainPanelProvider extends PanelProvider
 {
@@ -66,16 +68,12 @@ class MainPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->renderHook(
+                PanelsRenderHook::FOOTER,
+                fn(): View => view('filament.footer '),
+            )
             ->plugins([
                 GlobalSearchModalPlugin::make(),
-                EasyFooterPlugin::make()
-                    ->withFooterPosition('main.footer.end')
-                    ->withSentence('Arjuna Lingga Property')
-                    ->withLinks([
-                        ['title' => 'Instagram', 'url' => 'https://example.com/about'],
-                        ['title' => 'Facebook', 'url' => 'https://example.com/cgv'],
-                        ['title' => 'Privacy Policy', 'url' => 'https://example.com/privacy-policy']
-                    ]),
                 FilamentShieldPlugin::make()
                     ->gridColumns([
                         'default' => 1,
