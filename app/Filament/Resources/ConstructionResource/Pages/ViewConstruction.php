@@ -8,7 +8,7 @@ use Filament\Resources\Pages\ViewRecord;
 use Filament\Actions\Action;
 use App\Models\ProjectSummary;
 use App\Filament\Resources\ConstructionResource;
-use Filament\Forms\Components\{Section, TextInput};   
+use Filament\Forms\Components\{Section, TextInput};
 class ViewConstruction extends ViewRecord
 {
     protected static string $resource = ConstructionResource::class;
@@ -19,7 +19,7 @@ class ViewConstruction extends ViewRecord
             Action::make('Generate Summary')
                 ->label('Generate Summary')
                 ->icon('heroicon-o-document-text')
-                ->color('primary') 
+                ->color('primary')
                 ->requiresConfirmation()
                 ->action(function () {
 
@@ -33,7 +33,7 @@ class ViewConstruction extends ViewRecord
 
                     foreach ($construction->workers as $worker) {
                         $summary->workers()->attach($worker->id, [
-                            'start_date' => $worker->created_at,  
+                            'start_date' => $worker->created_at,
                             'end_date' => $construction->end_date ?? now(),
                         ]);
                     }
@@ -58,6 +58,9 @@ class ViewConstruction extends ViewRecord
                         ])
                         ->send();
                 }),
+            EditAction::make()
+                ->label('Edit Data')
+                ->color('info'),
         ];
     }
 

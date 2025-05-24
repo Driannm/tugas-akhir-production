@@ -10,9 +10,10 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Tables\Actions\{Action, ActionGroup};
 use Filament\Tables\Columns\{TextColumn, BadgeColumn};
+use Illuminate\Database\Eloquent\{Builder, SoftDeletingScope};
+use Filament\Forms\Components\{Select, Textarea, TextInput, DateTimePicker, DatePicker, FileUpload, Tabs, Section};
 
 class ProjectSummaryResource extends Resource
 {
@@ -28,7 +29,44 @@ class ProjectSummaryResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Section::make()
+                    ->schema([
+                        Select::make('construction_id')
+                            ->label('Nama Proyek')
+                            ->relationship('construction', 'construction_name')
+                            ->required()
+                            ->native(false)
+                            ->columnSpan(1),
+
+                        DatePicker::make('date')
+                            ->label('Tanggal')
+                            ->required()
+                            ->native(false),
+                    ])
+                    ->columns(2),
+
+                Section::make('Deskripsi dan Catatan')
+                    ->schema([
+                        Textarea::make('description')
+                            ->label('Deskripsi')
+                            ->required()
+                            ->rows(4),
+
+                        Textarea::make('notes')
+                            ->label('Catatan')
+                            ->rows(4),
+                    ])
+                    ->columns(2),
+
+                Section::make('Dokumentasi')
+                    ->schema([
+                        FileUpload::make('documentation')
+                            ->label('Dokumentasi')
+                            ->multiple()
+                            ->columnSpanFull()
+                            ->image()
+                            ->directory('documentation-progress'),
+                    ]),
             ]);
     }
 
@@ -61,8 +99,16 @@ class ProjectSummaryResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
+                ActionGroup::make([
+                    Action::make('Download')
+                        ->icon('heroicon-s-arrow-down-tray')
+                        ->url(fn(ProjectSummary $record) => route('export.project-summary', $record->id))
+                        ->openUrlInNewTab()
+                        ->color('success'),
+                    Tables\Actions\ViewAction::make()
+                        ->color('info'),
+                        Tables\Actions\EditAction::make(),
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

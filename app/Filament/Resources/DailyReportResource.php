@@ -44,12 +44,15 @@ class DailyReportResource extends Resource
                                     ->where('status_construction', 'sedang_berlangsung')
                                     ->pluck('construction_name', 'id');
                             })
-                            ->required(),
+                            ->required()
+                            ->reactive(),
 
                         DatePicker::make('report_date')
                             ->label('Tanggal Laporan')
                             ->required()
                             ->native(false)
+                            ->minDate(now())
+                            ->maxDate(now())
                             ->default(now())
                             ->placeholder('Pilih tanggal laporan'),
                     ])
@@ -99,25 +102,28 @@ class DailyReportResource extends Resource
                     ->columns(2)
                     ->collapsible(),
 
-                Section::make('Dokumentasi')
-                    ->icon('heroicon-m-photo')
-                    ->iconColor('primary')
-                    ->schema([
-                        FileUpload::make('documentations')
-                            ->label('Dokumentasi Proyek')
-                            ->nullable()
-                            ->multiple()
-                            ->reorderable()
-                            ->openable()
-                            ->image()
-                            ->maxFiles(10)
-                            ->maxSize(10240)
-                            ->panelLayout('grid')
-                            ->directory('constructions/daily-reports')
-                            ->helperText('Unggah maksimal 10 file, masing-masing maksimal 10MB.'),
-                    ])
-                    ->persistCollapsed()
-                    ->collapsible(),
+                FileUpload::make('photo')
+                    ->label('Dokumentasi Proyek')
+                    ->nullable()
+                    ->openable()
+                    ->image()
+                    ->columnSpanFull()
+                    ->openable()
+                    ->maxSize(10240)
+                    ->panelLayout('grid')
+                    ->directory(function (callable $get) {
+                        $constructionId = $get('construction_id');
+
+                        if ($constructionId) {
+                            $construction = Construction::find($constructionId);
+                            if ($construction) {
+                                return 'constructions/' . $construction->construction_name . '/daily-reports';
+                            }
+                        }
+
+                        return 'constructions/unknown/daily-reports';
+                    })
+                    ->helperText('Unggah maksimal 10 file, masing-masing maksimal 10MB.'),
 
                 Hidden::make('user_id')
                     ->default(auth()->id()),
@@ -136,12 +142,12 @@ class DailyReportResource extends Resource
             })
             ->emptyStateIcon('heroicon-o-clipboard-document')
             ->columns([
-                ImageColumn::make('photos')
+                ImageColumn::make('photo')
                     ->label('Dokumentasi')
                     ->disk('public')
                     ->toggleable()
-                    ->circular()
-                    ->stacked(),
+                    ->height(100)
+                    ->width(100),
 
                 TextColumn::make('construction.construction_name')
                     ->label('Proyek')

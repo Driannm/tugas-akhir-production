@@ -12,6 +12,7 @@ use Filament\Support\RawJs;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Notifications\Notification;
+use Illuminate\Http\UploadedFile;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
@@ -19,6 +20,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Tables\Columns\{TextColumn, Stack, ImageColumn};
 use Filament\Forms\Components\{Select, FileUpload, TextInput, Fieldset};
 use Filament\Tables\Actions\{EditAction, ViewAction, DeleteAction, CreateAction, BulkActionGroup, ActionGroup, DeleteBulkAction};
+
 
 class MaterialResource extends Resource
 {
@@ -38,14 +40,20 @@ class MaterialResource extends Resource
                 Fieldset::make('Dokumentasi Material')
                     ->schema([
                         FileUpload::make('image')
-                            ->disk('public')
-                            ->directory('material/dokumentasi')
-                            ->preserveFilenames()
+                            ->directory('material/images')
                             ->image()
                             ->visibility('public')
                             ->maxSize(10240)
-                            ->helperText('Ukuran file maksimal 10MB')
+                            ->preserveFilenames(false)
+                            ->getUploadedFileNameForStorageUsing(function (UploadedFile $file, $livewire) {
+                                $materialName = $livewire->data['material_name'] ?? 'unknown-material';
+                                $materialSlug = Str::slug($materialName);
+                                $extension = $file->getClientOriginalExtension();
+
+                                return "{$materialSlug}.{$extension}";
+                            })
                             ->uploadingMessage('Sedang mengunggah dokumentasi...')
+                            ->helperText('Ukuran file maksimal 10MB')
                             ->columnSpanFull(),
                     ])
                     ->columnSpanFull(),
@@ -106,6 +114,8 @@ class MaterialResource extends Resource
             ->columns([
                 ImageColumn::make('image')
                     ->square()
+                    ->height(80)
+                    ->width(80)
                     ->toggleable(),
                 TextColumn::make('material_name')
                     ->label('Nama Material')

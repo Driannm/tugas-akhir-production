@@ -24,9 +24,9 @@ class ListWorkers extends ListRecords
     {
         return [
             null => Tab::make('Semua'),
-            'Pekerja Tetap' => Tab::make()->query(fn($query) => $query->where('employment_status', 'Pekerja Tetap')),
-            'Pekerja Lepas' => Tab::make()->query(fn($query) => $query->where('employment_status', 'Pekerja Lepas')),
-            'Dipecat' => Tab::make()->query(fn($query) => $query->where('employment_status', 'Dipecat')),
+            'Pekerja Tetap' => Tab::make()->query(fn($query) => $query->where('employment_status', 'pekerja_tetap')),
+            'Pekerja Lepas' => Tab::make()->query(fn($query) => $query->where('employment_status', 'pekerja_lepas')),
+            'Dipecat' => Tab::make()->query(fn($query) => $query->where('employment_status', 'dipecat')),
         ];
     }
 }

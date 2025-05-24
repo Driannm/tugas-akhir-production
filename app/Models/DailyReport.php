@@ -25,7 +25,7 @@ class DailyReport extends Model
         'description',
         'issues',
         'weather',
-        'photos',
+        'photo',
         'status',
     ];
 }

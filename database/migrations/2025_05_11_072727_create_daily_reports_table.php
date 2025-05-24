@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('issues')->nullable(); 
             $table->string('weather')->nullable(); 
             $table->enum('status', ['on_progress', 'completed', 'delayed'])->default('on_progress'); 
-            $table->json('documentations')->nullable();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }

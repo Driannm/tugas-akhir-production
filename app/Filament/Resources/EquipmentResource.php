@@ -24,7 +24,7 @@ class EquipmentResource extends Resource
 
     protected static ?string $navigationGroup = 'Manajemen Sumber Daya';
     protected static ?string $navigationLabel = 'Stok Peralatan';
-    protected static ?string $label = 'Data Stok Peralatan';
+    protected static ?string $label = 'Peralatan';
     protected static ?int $navigationSort = 4;
     protected static ?string $navigationIcon = 'heroicon-o-cog';
     protected static ?string $activeNavigationIcon = 'heroicon-s-cog';

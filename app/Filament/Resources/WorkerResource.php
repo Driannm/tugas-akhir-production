@@ -192,6 +192,11 @@ class WorkerResource extends Resource
                         'dipecat' => 'heroicon-m-x-circle',
                         'pekerja_lepas' => 'heroicon-m-question-mark-circle',
                     })
+                    ->formatStateUsing(fn($state) => match ($state) {
+                        'pekerja_tetap' => 'Pekerja Tetap',
+                        'dipecat' => 'Dipecat',
+                        'pekerja_lepas' => 'Pekerja Lepas',
+                    })
                     ->limit(30),
 
                 TextColumn::make('construction.construction_name')
