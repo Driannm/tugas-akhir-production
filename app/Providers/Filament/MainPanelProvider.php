@@ -32,7 +32,7 @@ class MainPanelProvider extends PanelProvider
             ->id('main')
             ->path('main')
             ->login()
-            ->databaseNotifications()
+            
             ->brandName("Arjuna Lingga Property")
             ->brandLogo(asset('images/logo/logo-poltek.png'))
             ->brandLogoHeight('2rem')

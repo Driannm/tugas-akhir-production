@@ -3,10 +3,11 @@
 namespace App\Notifications;
 
 use App\Models\Construction;
+use Filament\Notifications\Notification as FilamentNotification;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Notification;
-use Illuminate\Notifications\Messages\DatabaseMessage;
-class ProjectAssigned extends Notification
+use Illuminate\Contracts\Queue\ShouldQueue;
+
+class ProjectAssigned implements ShouldQueue
 {
     use Queueable;
 
@@ -19,15 +20,26 @@ class ProjectAssigned extends Notification
         return ['database'];
     }
 
-    public function toDatabase(object $notifiable): DatabaseMessage
+    public function toFilament(object $notifiable): FilamentNotification
     {
-        return new DatabaseMessage([
+        $message = $this->getMessage();
+        
+        return FilamentNotification::make()
+            ->title($message['title'])
+            ->body($message['body'])
+            ->sendToDatabase($notifiable);
+    }
+
+    private function getMessage(): array
+    {
+        return [
             'title' => match ($this->type) {
                 'assigned' => 'Anda Ditugaskan ke Proyek Baru',
                 'completed' => 'Proyek Telah Diselesaikan',
                 'cancelled' => 'Proyek Telah Dibatalkan',
                 'replaced' => 'Anda Tidak Lagi Ditugaskan ke Proyek',
                 'replacement' => 'Penugasan Baru',
+                default => 'Notifikasi Proyek',
             },
             'body' => match ($this->type) {
                 'assigned' => "Proyek {$this->construction->construction_name} di {$this->construction->location} dimulai pada {$this->construction->start_date->format('d M Y')}.",
@@ -35,7 +47,8 @@ class ProjectAssigned extends Notification
                 'cancelled' => "Proyek {$this->construction->construction_name} telah dibatalkan. Tidak ada aktivitas lanjutan yang diperlukan.",
                 'replaced' => "Anda telah digantikan dari proyek {$this->construction->construction_name}. Terima kasih atas tugas Anda sebelumnya.",
                 'replacement' => "Anda ditugaskan menggantikan supervisor sebelumnya pada proyek {$this->construction->construction_name}. Harap lakukan koordinasi.",
+                default => '',
             },
-        ]);
+        ];
     }
 }

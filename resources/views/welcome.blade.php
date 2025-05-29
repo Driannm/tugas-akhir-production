@@ -1,92 +1,331 @@
 @extends('app')
 
 @section('content')
-    <header>
-        <nav class="bg-white border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-            <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl">
-                <a href="/" class="flex items-center">
-                    <img src="{{ asset('images/logo/logo.png') }}" class="mr-3 h-6 sm:h-9" alt="Ajuna Logo" />
+    <!-- Header with Navigation -->
+    <header class="bg-white shadow-sm dark:bg-gray-800 sticky top-0 z-50">
+        <nav class="px-4 lg:px-6 py-3 max-w-7xl mx-auto">
+            <div class="flex justify-between items-center">
+                <a href="/" class="flex items-center space-x-3">
+                    <img src="{{ asset('images/logo/logo.png') }}" class="h-8 sm:h-10" alt="Ajuna Logo" />
                     <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Ajuna Property</span>
                 </a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#features"
+                        class="text-gray-700 hover:text-yellow-400 dark:text-gray-300 dark:hover:text-white transition">Fitur</a>
+                    <a href="#benefits"
+                        class="text-gray-700 hover:text-yellow-400 dark:text-gray-300 dark:hover:text-white transition">Keunggulan</a>
+                    <a href="#testimonials"
+                        class="text-gray-700 hover:text-yellow-400 dark:text-gray-300 dark:hover:text-white transition">Testimoni</a>
+                    <a href="/main/login"
+                        class="px-4 py-2 bg-yellow-400 text-gray-900 rounded-lg font-medium hover:bg-yellow-500 transition">Masuk</a>
+                </div>
+                <button class="md:hidden text-gray-700 dark:text-gray-300">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                        </path>
+                    </svg>
+                </button>
             </div>
         </nav>
     </header>
 
+    <!-- Hero Section with Image -->
     <section class="bg-white dark:bg-gray-900">
-        <div class="py-18 px-4 mx-auto mt-24 max-w-screen-xl text-center lg:py-16 lg:px-12">
-            <a href="#"
-                class="inline-flex justify-between items-center py-1 px-1 mb-7 text-sm text-gray-700 bg-gray-100 rounded-full dark:bg-gray-800 dark:text-white"
-                role="alert">
-                <span class="text-sm font-medium rounded-full text-black dark:text-white px-4 py-2">
-                    Selamat Datang di Sistem Management Proyek
-                </span>
-            </a>
+        <div class="max-w-7xl mx-auto px-4 py-12 md:py-24 lg:flex lg:items-center lg:gap-12">
+            <div class="lg:w-1/2">
+                <div class="inline-flex items-center px-4 py-2 mb-6 bg-yellow-50 rounded-full dark:bg-gray-800">
+                    <span class="text-sm font-medium text-yellow-600 dark:text-yellow-400">
+                        Selamat Datang di Sistem Management Proyek
+                    </span>
+                </div>
 
-            <h1 class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                Bangun Masa Depan Properti dengan Sistem Terintegrasi
-            </h1>
+                <h1
+                    class="mb-6 text-4xl font-extrabold tracking-tight leading-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+                    Bangun Masa Depan Properti dengan Sistem Terintegrasi
+                </h1>
 
-            <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-                Di Ajuna Property, kami menghadirkan solusi inovatif dalam pengelolaan proyek properti. Dengan teknologi dan strategi
-                terbaik, kami memastikan setiap proyek berjalan efisien, transparan, dan bernilai tinggi bagi semua pemangku kepentingan.
-            </p>
+                <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
+                    Di Ajuna Property, kami menghadirkan solusi inovatif dalam pengelolaan proyek properti. Dengan teknologi
+                    dan strategi terbaik, kami memastikan setiap proyek berjalan efisien, transparan, dan bernilai tinggi
+                    bagi semua pemangku kepentingan.
+                </p>
 
-            <div class="flex flex-col mb-8 lg:mb-16 space-y-4 sm:flex-row sm:justify-center sm:space-y-0 sm:space-x-4">
-                <a href="/main/login"
-                    class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-white rounded-lg bg-yellow-300 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900">
-                    Masuk
-                    <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <path fill-rule="evenodd"
-                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                            clip-rule="evenodd"></path>
-                    </svg>
-                </a>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="/main/login"
+                        class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 bg-yellow-400 rounded-lg hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900 transition">
+                        Masuk Sistem
+                        <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd"
+                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                                clip-rule="evenodd"></path>
+                        </svg>
+                    </a>
+                    <a href="#contact"
+                        class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 transition">
+                        Hubungi Kami
+                    </a>
+                </div>
+            </div>
+            <div class="lg:w-1/2 mt-12 lg:mt-0">
+                <img src="{{ asset('images/hero-image.png') }}" alt="Property Management Dashboard"
+                    class="w-full rounded-xl shadow-xl dark:shadow-gray-800/50">
             </div>
         </div>
     </section>
 
-    <footer class="bg-white dark:bg-gray-900">
-        <div class="max-w-screen-xl p-4 py-6 mx-auto -mt-8 lg:py-16 md:p-8 lg:p-10">
-            <div class="text-center">
-                <a href="/" class="flex items-center justify-center mb-5 text-2xl font-bold text-gray-900 dark:text-white">
-                    <img src="{{ asset('images/logo/logo_text.png') }}" class="h-6 mr-3 sm:h-9" alt="Ajuna Logo" />
-                </a>
-                <span class="block text-sm text-center text-gray-500 dark:text-gray-400">
-                    © 2024 AJUNA PROPERTY™. All Rights Reserved.
-                </span>
-                <ul class="flex justify-center mt-5 space-x-5">
-                    {{-- Facebook --}}
-                    <li>
-                        <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white dark:text-gray-400">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                    </li>
-                    {{-- Instagram --}}
-                    <li>
-                        <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white dark:text-gray-400">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path fill-rule="evenodd"
-                                    d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-                                    clip-rule="evenodd" />
-                            </svg>
-                        </a>
-                    </li>
-                    {{-- Twitter --}}
-                    <li>
-                        <a href="#" class="text-gray-500 hover:text-gray-900 dark:hover:text-white dark:text-gray-400">
-                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                                <path
-                                    d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
+    <!-- Features Section -->
+    <section id="features" class="bg-gray-50 dark:bg-gray-800 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+                    Fitur Unggulan Sistem Kami
+                </h2>
+                <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 mx-auto">
+                    Solusi komprehensif untuk manajemen proyek properti Anda
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
+                    <div
+                        class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 dark:bg-yellow-900/30">
+                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Manajemen Proyek Terpusat</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Pantau seluruh proyek properti Anda dalam satu dashboard terintegrasi dengan timeline dan progress
+                        yang real-time.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
+                    <div
+                        class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 dark:bg-yellow-900/30">
+                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Penjadwalan Otomatis</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Sistem penjadwalan cerdas yang membantu Anda mengoptimalkan alokasi sumber daya dan memenuhi tenggat
+                        waktu.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
+                    <div
+                        class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 dark:bg-yellow-900/30">
+                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Analisis Risiko</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Identifikasi potensi risiko proyek secara dini dengan alat analisis prediktif kami untuk mitigasi
+                        yang lebih baik.
+                    </p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
+                    <div
+                        class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 dark:bg-yellow-900/30">
+                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Manajemen Anggaran</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Pantau pengeluaran proyek secara real-time dengan alat pelacakan anggaran yang akurat dan
+                        terperinci.
+                    </p>
+                </div>
+
+                <!-- Feature 5 -->
+                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
+                    <div
+                        class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 dark:bg-yellow-900/30">
+                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Kolaborasi Tim</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Platform komunikasi terintegrasi untuk seluruh tim, kontraktor, dan pemangku kepentingan proyek.
+                    </p>
+                </div>
+
+                <!-- Feature 6 -->
+                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
+                    <div
+                        class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 dark:bg-yellow-900/30">
+                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
+                            viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
+                            </path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Laporan Otomatis</h3>
+                    <p class="text-gray-600 dark:text-gray-400">
+                        Hasilkan laporan proyek profesional secara otomatis dengan berbagai template yang dapat disesuaikan.
+                    </p>
+                </div>
             </div>
         </div>
-    </footer>
+    </section>
+
+
+    <!-- Benefits Section -->
+    <section id="benefits" class="bg-white dark:bg-gray-900 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="lg:flex lg:items-center lg:gap-12">
+                <div class="lg:w-1/2 mb-12 lg:mb-0">
+                    <img src="{{ asset('images/benefits-image.png') }}" alt="Project Management Benefits"
+                        class="w-full rounded-xl shadow-xl dark:shadow-gray-800/50">
+                </div>
+                <div class="lg:w-1/2">
+                    <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl mb-6">
+                        Keunggulan Menggunakan Sistem Kami
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400">
+                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Efisiensi Waktu 40% Lebih
+                                    Baik</h3>
+                                <p class="mt-1 text-gray-600 dark:text-gray-400">
+                                    Otomatisasi proses manual mengurangi waktu administrasi hingga 40%, memungkinkan fokus
+                                    pada aspek strategis proyek.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400">
+                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Pengurangan Biaya Tak Terduga
+                                </h3>
+                                <p class="mt-1 text-gray-600 dark:text-gray-400">
+                                    Sistem prediktif kami membantu mengidentifikasi potensi pembengkakan biaya sebelum
+                                    terjadi, menghemat hingga 15% anggaran proyek.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="flex">
+                            <div class="flex-shrink-0">
+                                <div
+                                    class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400">
+                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M5
+                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d=" M5 13l4 4L19 7"></path>
+                                    </svg>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Peningkatan Transparansi
+                                    Proyek</h3>
+                                <p class="mt-1 text-gray-600 dark:text-gray-400">
+                                    Semua data proyek dapat diakses secara real-time oleh pemangku kepentingan, meningkatkan
+                                    komunikasi dan pengambilan keputusan.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="bg-gray-50 dark:bg-gray-800 py-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl mb-12">
+                Apa Kata Mereka
+            </h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        "Sistem Ajuna Property sangat membantu kami dalam mengelola proyek dengan lebih efisien dan tepat
+                        waktu."
+                    </p>
+                    <div class="flex items-center justify-center space-x-4">
+                        <img src="{{ asset('images/testimonials/user1.jpg') }}" alt="User 1"
+                            class="w-12 h-12 rounded-full object-cover">
+                        <div class="text-left">
+                            <p class="text-gray-900 dark:text-white font-bold">Budi Santoso</p>
+                            <p class="text-yellow-400">Manajer Proyek</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        "Fitur penjadwalan otomatis dan pelaporan membuat pekerjaan kami jadi lebih mudah dan terstruktur."
+                    </p>
+                    <div class="flex items-center justify-center space-x-4">
+                        <img src="{{ asset('images/testimonials/user2.jpg') }}" alt="User 2"
+                            class="w-12 h-12 rounded-full object-cover">
+                        <div class="text-left">
+                            <p class="text-gray-900 dark:text-white font-bold">Sari Dewi</p>
+                            <p class="text-yellow-400">Kepala Keuangan</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">
+                        "Kolaborasi tim jadi seamless berkat platform ini. Sangat direkomendasikan!"
+                    </p>
+                    <div class="flex items-center justify-center space-x-4">
+                        <img src="{{ asset('images/testimonials/user3.jpg') }}" alt="User 3"
+                            class="w-12 h-12 rounded-full object-cover">
+                        <div class="text-left">
+                            <p class="text-gray-900 dark:text-white font-bold">Agus Rahman</p>
+                            <p class="text-yellow-400">Kontraktor</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
 @endsection

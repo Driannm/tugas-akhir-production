@@ -21,8 +21,8 @@ use Filament\Tables\Actions\{Action, ActionGroup, ViewAction, EditAction, Delete
 class DailyReportResource extends Resource
 {
     protected static ?string $model = DailyReport::class;
-    protected static ?string $label = 'Laporan Harian';
-    protected static ?string $navigationLabel = 'Laporan Harian';
+    protected static ?string $label = 'Progress Harian';
+    protected static ?string $navigationLabel = 'Progress Harian';
     protected static ?string $navigationGroup = 'Laporan & Keuangan';
     protected static ?int $navigationSort = 3;
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
@@ -51,8 +51,6 @@ class DailyReportResource extends Resource
                             ->label('Tanggal Laporan')
                             ->required()
                             ->native(false)
-                            ->minDate(now())
-                            ->maxDate(now())
                             ->default(now())
                             ->placeholder('Pilih tanggal laporan'),
                     ])

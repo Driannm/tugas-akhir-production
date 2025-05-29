@@ -14,8 +14,6 @@ class ProjectAssignObserver
         if ($supervisor) {
             $supervisor->notify(new ProjectAssigned($construction, 'assigned'));
         }
-
-        
     }
 
     public function updated(Construction $construction): void
@@ -26,12 +24,13 @@ class ProjectAssignObserver
             $status = $construction->status_construction;
 
             if ($status === 'selesai' && $currentSupervisor) {
-                $currentSupervisor->notify(new ProjectAssigned($construction, 'completed'));
+                \Filament\Notifications\Notification::make()
+                    ->title('Proyek Telah Diselesaikan')
+                    ->body("Proyek {$construction->construction_name} telah selesai. Terima kasih atas kontribusi Anda.")
+                    ->sendToDatabase($currentSupervisor);
             }
 
-            if ($status === 'dibatalkan' && $currentSupervisor) {
-                $currentSupervisor->notify(new ProjectAssigned($construction, 'cancelled'));
-            }
+            // Similar for other status changes
         }
 
         if ($construction->wasChanged('supervisor_id')) {
@@ -39,36 +38,18 @@ class ProjectAssignObserver
             $oldSupervisor = User::find($oldSupervisorId);
 
             if ($oldSupervisor) {
-                $oldSupervisor->notify(new ProjectAssigned($construction, 'replaced'));
+                \Filament\Notifications\Notification::make()
+                    ->title('Anda Tidak Lagi Ditugaskan ke Proyek')
+                    ->body("Anda telah digantikan dari proyek {$construction->construction_name}. Terima kasih atas tugas Anda sebelumnya.")
+                    ->sendToDatabase($oldSupervisor);
             }
 
             if ($currentSupervisor) {
-                $currentSupervisor->notify(new ProjectAssigned($construction, 'replacement'));
+                \Filament\Notifications\Notification::make()
+                    ->title('Penugasan Baru')
+                    ->body("Anda ditugaskan menggantikan supervisor sebelumnya pada proyek {$construction->construction_name}. Harap lakukan koordinasi.")
+                    ->sendToDatabase($currentSupervisor);
             }
         }
-    }
-
-    /**
-     * Handle the Construction "deleted" event.
-     */
-    public function deleted(Construction $construction): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Construction "restored" event.
-     */
-    public function restored(Construction $construction): void
-    {
-        //
-    }
-
-    /**
-     * Handle the Construction "force deleted" event.
-     */
-    public function forceDeleted(Construction $construction): void
-    {
-        //
     }
 }
