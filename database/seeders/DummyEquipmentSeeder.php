@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Carbon\Carbon;
@@ -17,7 +16,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-001-ALP',
                 'status' => 'available',
                 'quantity' => 6,
-                'description' => 'Bor listrik multifungsi cocok untuk kayu dan beton ringan.',
+                'description' => 'Bor listrik multifungsi untuk pengeboran dinding rumah, pemasangan gantungan lampu, dan keperluan renovasi ringan.',
                 'last_maintenance' => Carbon::now()->subDays(12),
             ],
             [
@@ -25,7 +24,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-002-ALP',
                 'status' => 'available',
                 'quantity' => 4,
-                'description' => 'Gerinda 4 inci untuk pemotongan besi ringan dan finishing.',
+                'description' => 'Gerinda tangan 4 inci, digunakan untuk pemotongan besi rangka atap, kusen besi, dan finishing renovasi rumah atau cafe.',
                 'last_maintenance' => Carbon::now()->subDays(7),
             ],
             [
@@ -33,7 +32,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-003-ALP',
                 'status' => 'available',
                 'quantity' => 20,
-                'description' => 'Set obeng serbaguna untuk keperluan instalasi ringan.',
+                'description' => 'Set obeng lengkap untuk pekerjaan instalasi listrik, perbaikan furniture, dan pemasangan peralatan rumah tangga.',
                 'last_maintenance' => Carbon::now()->subDays(25),
             ],
             [
@@ -41,7 +40,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-004-ALP',
                 'status' => 'available',
                 'quantity' => 15,
-                'description' => 'Tang potong kecil untuk kabel dan kawat ringan.',
+                'description' => 'Tang potong praktis untuk pemotongan kabel listrik, kawat pagar, dan instalasi ringan lainnya di proyek rumah atau kost.',
                 'last_maintenance' => Carbon::now()->subDays(45),
             ],
             [
@@ -49,7 +48,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-005-ALP',
                 'status' => 'under_maintenance',
                 'quantity' => 2,
-                'description' => 'Genset 1000 watt cocok untuk proyek kecil tanpa listrik PLN.',
+                'description' => 'Genset portable 1000 watt untuk kebutuhan listrik darurat di lokasi proyek cafe, villa, atau rumah tanpa akses PLN.',
                 'last_maintenance' => Carbon::now()->subDays(60),
             ],
             [
@@ -57,7 +56,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-006-ALP',
                 'status' => 'available',
                 'quantity' => 3,
-                'description' => 'Alat ukur digital akurat untuk pengukuran jarak.',
+                'description' => 'Alat ukur jarak digital dengan akurasi tinggi, digunakan untuk pengukuran ruang, denah, dan perhitungan desain interior.',
                 'last_maintenance' => Carbon::now()->subDays(18),
             ],
             [
@@ -65,7 +64,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-007-ALP',
                 'status' => 'available',
                 'quantity' => 10,
-                'description' => 'Digunakan untuk pemasangan keramik tanpa merusak permukaan.',
+                'description' => 'Palu karet digunakan untuk pemasangan keramik, lantai vinyl, dan material rapuh agar tidak pecah saat proses instalasi.',
                 'last_maintenance' => Carbon::now()->subDays(22),
             ],
             [
@@ -73,7 +72,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-008-ALP',
                 'status' => 'available',
                 'quantity' => 4,
-                'description' => 'Tile cutter manual untuk pemotongan presisi.',
+                'description' => 'Tile cutter manual untuk pemotongan keramik secara presisi, cocok digunakan pada proyek cafe atau perumahan.',
                 'last_maintenance' => Carbon::now()->subDays(13),
             ],
             [
@@ -81,7 +80,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-009-ALP',
                 'status' => 'available',
                 'quantity' => 6,
-                'description' => 'Tangga ringan dan fleksibel untuk instalasi plafon dan lampu.',
+                'description' => 'Tangga lipat aluminium untuk pemasangan plafon, pengecatan dinding, atau instalasi lampu di rumah dan ruko.',
                 'last_maintenance' => Carbon::now()->subDays(29),
             ],
             [
@@ -89,16 +88,15 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-010-ALP',
                 'status' => 'under_maintenance',
                 'quantity' => 1,
-                'description' => 'Kompresor angin mini untuk alat semprot cat kecil.',
+                'description' => 'Kompresor mini untuk mendukung pekerjaan pengecatan tembok, pintu, dan pagar di proyek kecil seperti cafe atau rumah.',
                 'last_maintenance' => Carbon::now()->subDays(90),
             ],
-            // Additional Equipment Records
             [
                 'name' => 'Mesin Las Inverter Jasic',
                 'code' => 'EQ-011-ALP',
                 'status' => 'available',
                 'quantity' => 8,
-                'description' => 'Mesin las inverter, cocok untuk berbagai keperluan pengelasan.',
+                'description' => 'Mesin las portable untuk pembuatan rangka kanopi, pagar rumah, dan teralis jendela.',
                 'last_maintenance' => Carbon::now()->subDays(15),
             ],
             [
@@ -106,7 +104,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-012-ALP',
                 'status' => 'under_maintenance',
                 'quantity' => 3,
-                'description' => 'Pompa air untuk keperluan distribusi air dalam proyek.',
+                'description' => 'Pompa air untuk mendukung distribusi air pada proyek pembangunan kost dan kontrakan.',
                 'last_maintenance' => Carbon::now()->subDays(40),
             ],
             [
@@ -114,7 +112,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-013-ALP',
                 'status' => 'available',
                 'quantity' => 12,
-                'description' => 'Kunci inggris dengan ukuran bervariasi untuk keperluan mekanik.',
+                'description' => 'Kunci inggris multifungsi untuk pekerjaan instalasi pipa air, perbaikan AC, dan plumbing rumah.',
                 'last_maintenance' => Carbon::now()->subDays(5),
             ],
             [
@@ -122,7 +120,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-014-ALP',
                 'status' => 'available',
                 'quantity' => 10,
-                'description' => 'Pemadam api portabel yang dapat digunakan dalam kondisi darurat.',
+                'description' => 'Alat pemadam api ringan (APAR) yang wajib tersedia di proyek cafe, villa, dan rumah untuk antisipasi kebakaran.',
                 'last_maintenance' => Carbon::now()->subDays(100),
             ],
             [
@@ -130,7 +128,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-015-ALP',
                 'status' => 'available',
                 'quantity' => 2,
-                'description' => 'Pompa beton besar untuk pemompaan beton dalam proyek konstruksi.',
+                'description' => 'Pompa beton kapasitas sedang untuk pengecoran lantai 2 rumah tinggal atau proyek ruko.',
                 'last_maintenance' => Carbon::now()->subDays(30),
             ],
             [
@@ -138,7 +136,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-016-ALP',
                 'status' => 'under_maintenance',
                 'quantity' => 1,
-                'description' => 'Mixer beton electric untuk proyek pembangunan.',
+                'description' => 'Mesin pengaduk beton mini untuk pengecoran lantai rumah, kolom, dan pondasi ringan.',
                 'last_maintenance' => Carbon::now()->subDays(65),
             ],
             [
@@ -146,7 +144,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-017-ALP',
                 'status' => 'available',
                 'quantity' => 5,
-                'description' => 'Alat pendeteksi logam portabel untuk survei lokasi.',
+                'description' => 'Alat pendeteksi logam portabel, membantu dalam pemeriksaan pipa bawah tanah dan kabel instalasi sebelum pengeboran.',
                 'last_maintenance' => Carbon::now()->subDays(50),
             ],
             [
@@ -154,7 +152,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-018-ALP',
                 'status' => 'available',
                 'quantity' => 6,
-                'description' => 'Trolley untuk membawa barang berat dengan kapasitas hingga 300 Kg.',
+                'description' => 'Trolley dorong untuk mengangkut bahan bangunan seperti semen, cat, dan keramik di lokasi proyek.',
                 'last_maintenance' => Carbon::now()->subDays(80),
             ],
             [
@@ -162,7 +160,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-019-ALP',
                 'status' => 'available',
                 'quantity' => 3,
-                'description' => 'Kompresor pneumatik untuk alat-alat berbasis udara.',
+                'description' => 'Kompresor untuk alat tembak paku atau cat semprot di pekerjaan interior rumah dan cafe.',
                 'last_maintenance' => Carbon::now()->subDays(14),
             ],
             [
@@ -170,7 +168,7 @@ class DummyEquipmentSeeder extends Seeder
                 'code' => 'EQ-020-ALP',
                 'status' => 'available',
                 'quantity' => 1,
-                'description' => 'Genset portabel 2000 watt untuk keperluan darurat.',
+                'description' => 'Genset portabel 2000 watt sebagai sumber listrik cadangan di lokasi proyek rumah atau cafe.',
                 'last_maintenance' => Carbon::now()->subDays(20),
             ],
         ];

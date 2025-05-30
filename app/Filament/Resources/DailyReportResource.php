@@ -12,11 +12,12 @@ use Filament\Notifications\Notification;
 use App\Models\{DailyReport, Construction};
 
 use Illuminate\Support\Str;
+use Illuminate\Support\HtmlString;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Columns\{TextColumn, Stack, ImageColumn};
 use Illuminate\Database\Eloquent\{SoftDeletingScope, Builder};
 use App\Filament\Resources\DailyReportResource\{Pages, RelationManagers};
-use Filament\Forms\Components\{Select, Textarea, FileUpload, TextInput, DatePicker, Section, Hidden};
+use Filament\Forms\Components\{Select, Textarea, FileUpload, TextInput, DatePicker, Section, Hidden, RichEditor};
 use Filament\Tables\Actions\{Action, ActionGroup, ViewAction, EditAction, DeleteAction, DeleteBulkAction};
 class DailyReportResource extends Resource
 {
@@ -50,6 +51,7 @@ class DailyReportResource extends Resource
                         DatePicker::make('report_date')
                             ->label('Tanggal Laporan')
                             ->required()
+                            ->readOnly()
                             ->native(false)
                             ->default(now())
                             ->placeholder('Pilih tanggal laporan'),
@@ -61,12 +63,36 @@ class DailyReportResource extends Resource
                     ->icon('heroicon-m-document-text')
                     ->iconColor('primary')
                     ->schema([
-                        Textarea::make('description')
+                        RichEditor::make('description')
                             ->label('Uraian Pekerjaan')
+                            ->toolbarButtons([
+                                'bold',
+                                'bulletList',
+                                'h2',
+                                'h3',
+                                'italic',
+                                'orderedList',
+                                'redo',
+                                'underline',
+                                'undo',
+                            ])
+                            ->disableGrammarly()
                             ->placeholder('Contoh: Pemasangan rangka baja di area timur proyek.'),
 
-                        Textarea::make('issues')
+                        RichEditor::make('issues')
                             ->label('Kendala')
+                            ->toolbarButtons([
+                                'bold',
+                                'bulletList',
+                                'h2',
+                                'h3',
+                                'italic',
+                                'orderedList',
+                                'redo',
+                                'underline',
+                                'undo',
+                            ])
+                            ->disableGrammarly()
                             ->placeholder('Contoh: Keterlambatan material karena cuaca.'),
                     ])
                     ->columns(2)
@@ -155,11 +181,13 @@ class DailyReportResource extends Resource
 
                 TextColumn::make('description')
                     ->label('Uraian Pekerjaan')
+                    ->formatStateUsing(fn (string $state): HtmlString => new HtmlString($state))
                     ->wrap(),
 
                 TextColumn::make('issues')
                     ->label('Kendala')
                     ->wrap()
+                    ->html()
                     ->listWithLineBreaks(),
 
                 TextColumn::make('weather')

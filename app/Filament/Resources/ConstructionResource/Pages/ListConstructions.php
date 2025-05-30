@@ -24,7 +24,7 @@ class ListConstructions extends ListRecords
         $query = parent::getTableQuery();
 
         // Batasi query untuk hanya menampilkan proyek yang ditugaskan ke supervisor yang sedang login
-        if (auth()->user()?->hasRole('Supervisor')) {
+        if (auth()->user()?->hasRole('supervisor')) {
             $query->where('supervisor_id', auth()->id());
         }
 

@@ -199,7 +199,7 @@ class WorkerResource extends Resource
                     })
                     ->limit(30),
 
-                TextColumn::make('construction.construction_name')
+                TextColumn::make('constructions.construction_name')
                     ->label('Proyek')
                     ->sortable()
                     ->toggleable()

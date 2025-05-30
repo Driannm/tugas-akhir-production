@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Worker extends Model
 {
     use HasFactory;
-    public function construction()
+    public function constructions()
     {
-        return $this->belongsTo(Construction::class, 'construction_id');
+        return $this->belongsToMany(Construction::class, 'construction_worker');
     }
 
     protected $fillable = [

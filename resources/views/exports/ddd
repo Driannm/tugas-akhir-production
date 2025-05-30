@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Invoice #{{ $payment->reference_number }} - {{ $construction->construction_name }}</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #333;
+      margin: 0;
+      padding: 0;
+      background: #fff;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 30px;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #1a365d;
+      padding-bottom: 10px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo svg {
+      width: 40px;
+      height: 40px;
+      margin-right: 10px;
+    }
+
+    .logo h1 {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1a365d;
+      margin: 0;
+    }
+
+    .invoiceDetails {
+      text-align: right;
+    }
+
+    .invoiceDetails h2 {
+      margin: 0;
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+    .invoiceDetails p {
+      margin: 2px 0;
+      font-size: 12px;
+    }
+
+    .details {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+
+    .details div {
+      width: 48%;
+      font-size: 12px;
+    }
+
+    .details h3 {
+      margin: 0 0 5px 0;
+      font-size: 14px;
+      color: #1a365d;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table th, table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      font-size: 12px;
+    }
+
+    table th {
+      background: #f0f4f8;
+      color: #1a365d;
+      font-weight: 600;
+    }
+
+    table .text-right {
+      text-align: right;
+    }
+
+    .summary {
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    .summary th, .summary td {
+      text-align: right;
+      font-size: 12px;
+      padding: 8px;
+    }
+
+    .summary th {
+      width: 80%;
+    }
+
+    .summary .total {
+      font-weight: 700;
+      background: #f0f4f8;
+    }
+
+    .terms {
+      font-size: 11px;
+      color: #555;
+      margin-top: 30px;
+      border-top: 1px solid #ddd;
+      padding-top: 10px;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 11px;
+      margin-top: 30px;
+      color: #888;
+    }
+
+    .watermark {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      font-size: 100px;
+      color: #1a365d;
+      opacity: 0.06;
+      transform: translate(-50%, -50%) rotate(-30deg);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="watermark">{{ $payment->status === 'lunas' ? 'PAID' : 'INVOICE' }}</div>
+
+    <header>
+      <div class="logo">
+        <svg>
+          <circle cx="50%" cy="50%" r="40%" fill="#1a365d"></circle>
+        </svg>
+        <h1>PT Arjuna Lingga Property</h1>
+      </div>
+      <div class="invoiceDetails">
+        <h2>Invoice #{{ $payment->reference_number }}</h2>
+        <p>Tanggal: {{ \Carbon\Carbon::parse($payment->payment_date)->format('d M Y') }}</p>
+        <p>Jatuh Tempo: {{ $payment->due_date ? \Carbon\Carbon::parse($payment->due_date)->format('d M Y') : 'Sesuai kesepakatan' }}</p>
+      </div>
+    </header>
+
+    <div class="details">
+      <div>
+        <h3>Kepada</h3>
+        <p><strong>{{ $construction->client_name ?? '-' }}</strong><br>
+        {{ $construction->location ?? '-' }}<br>
+        Email: {{ $construction->client_email ?? '-' }}</p>
+      </div>
+      <div>
+        <h3>Informasi Proyek</h3>
+        <p>Nama Proyek: <strong>{{ $construction->construction_name }}</strong><br>
+        Status Pembayaran: <strong>{{ ucfirst($payment->status) }}</strong><br>
+        Metode: <strong>{{ $payment->payment_type }}</strong><br>
+        Cicilan ke: {{ $payment->installment_number ?? '-' }}</p>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Deskripsi</th>
+          <th>Jumlah</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Pembayaran Proyek: {{ $construction->construction_name }}</td>
+          <td>1</td>
+          <td class="text-right">Rp {{ number_format($payment->amount, 0, ',', '.') }}</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table class="summary">
+      <tr>
+        <th>Total</th>
+        <td class="total">Rp {{ number_format($payment->amount, 0, ',', '.') }}</td>
+      </tr>
+      <tr>
+        <th>Terbilang</th>
+        <td>{{ $payment->amount_in_words ?? '-' }} Rupiah</td>
+      </tr>
+    </table>
+
+    <div class="terms">
+      <strong>Syarat & Ketentuan:</strong><br>
+      1. Pembayaran dianggap sah setelah dana masuk ke rekening perusahaan.<br>
+      2. Invoice berlaku hingga {{ \Carbon\Carbon::parse($payment->due_date)->addDays(7)->format('d M Y') }}.<br>
+      3. Jika ada pertanyaan, hubungi CS kami di info@arjunalp.co.id.<br>
+    </div>
+
+    <footer>
+      PT Arjuna Lingga Property - Jl. Raya Hebat No. 123, Jakarta - Telp (021) 123-4567
+    </footer>
+  </div>
+</body>
+</html>

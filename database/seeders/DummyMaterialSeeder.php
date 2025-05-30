@@ -21,6 +21,13 @@ class DummyMaterialSeeder extends Seeder
             ['material_name' => 'Cat Tembok Putih', 'unit_price' => 120000, 'unit' => 'liter', 'image' => 'images/dummy-images/cat-tembok-putih.png'],
             ['material_name' => 'Paku 5 cm', 'unit_price' => 15000, 'unit' => 'kg', 'image' => 'images/dummy-images/paku.jpg'],
             ['material_name' => 'Pipa PVC 1/2 inch', 'unit_price' => 20000, 'unit' => 'meter', 'image' => 'images/dummy-images/pipa-pvc.jpg'],
+            
+            ['material_name' => 'Triplek 9mm', 'unit_price' => 125000, 'unit' => 'lembar', 'image' => 'images/dummy-images/triplek-9mm.png'],
+            ['material_name' => 'Asbes Gelombang 6 Feet', 'unit_price' => 65000, 'unit' => 'lembar', 'image' => 'images/dummy-images/asbes-gelombang.png'],
+            ['material_name' => 'Kabel Listrik NYA 2.5mm', 'unit_price' => 9500, 'unit' => 'meter', 'image' => 'images/dummy-images/kabel-nya.png'],
+            ['material_name' => 'Besi Hollow 4x4', 'unit_price' => 70000, 'unit' => 'batang', 'image' => 'images/dummy-images/besi-hollow.png'],
+            ['material_name' => 'Kawat Bendrat 1kg', 'unit_price' => 22000, 'unit' => 'kg', 'image' => 'images/dummy-images/kawat-bendrat.png'],
+            ['material_name' => 'Plafon Gypsum 9mm', 'unit_price' => 58000, 'unit' => 'lembar', 'image' => 'images/dummy-images/plafon-gypsum.png'],
         ];
 
         foreach ($materials as $item) {

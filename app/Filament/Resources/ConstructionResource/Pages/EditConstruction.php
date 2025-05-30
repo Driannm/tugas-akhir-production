@@ -46,4 +46,20 @@ class EditConstruction extends EditRecord
 
         return $record;
     }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $workers = $data['workers'] ?? [];
+        unset($data['workers']); // Kita handle manual nanti
+        $this->workersToAttach = $workers;
+
+        return $data;
+    }
+
+    protected function afterSave(): void
+    {
+        if (!empty($this->workersToAttach)) {
+            $this->record->workers()->sync($this->workersToAttach);
+        }
+    }
 }

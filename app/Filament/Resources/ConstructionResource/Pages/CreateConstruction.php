@@ -24,4 +24,20 @@ class CreateConstruction extends CreateRecord
             ->title('Proyek Berhasil Ditambahkan')
             ->body('Data proyek baru telah berhasil disimpan ke sistem. Anda dapat melanjutkan ke manajemen proyek atau menambah proyek lainnya.');
     }
+
+    protected function mutateFormDataBeforeCreate(array $data): array
+    {
+        $workers = $data['workers'] ?? [];
+        unset($data['workers']); // Kita handle manual nanti
+        $this->workersToAttach = $workers;
+
+        return $data;
+    }
+
+    protected function afterCreate(): void
+    {
+        if (!empty($this->workersToAttach)) {
+            $this->record->workers()->sync($this->workersToAttach);
+        }
+    }
 }

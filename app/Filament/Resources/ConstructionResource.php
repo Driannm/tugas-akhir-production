@@ -12,6 +12,7 @@ use Filament\Notifications\Notification;
 use App\Filament\Resources\ConstructionResource\RelationManagers\WorkersRelationManager;
 use App\Filament\Resources\ConstructionResource\RelationManagers\MaterialRelationManager;
 
+use Filament\Forms\Get;
 use App\Models\{Construction, User, Worker};
 use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
@@ -142,11 +143,15 @@ class ConstructionResource extends Resource
                     Select::make('workers')
                         ->label('Pekerja')
                         ->multiple()
-                        ->options(Worker::pluck('worker_name', 'id'))
-                        ->default(fn($record) => $record?->workers->pluck('id'))
+                        ->options(function ($get) {
+                            $recordId = request()->route('record');
+                            return Worker::whereDoesntHave('constructions', function ($query) use ($recordId) {
+                                $query->where('constructions.id', '!=', $recordId);
+                            })->pluck('worker_name', 'id');
+                        })
+                        ->default(fn($record) => $record?->workers?->pluck('id'))
                         ->searchable()
                         ->columnSpanFull()
-                        ->visibleOn('create'),
                 ])
                 ->collapsible()
                 ->columns(2)
@@ -157,7 +162,7 @@ class ConstructionResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->defaultSort('start_date', 'desc')
+            ->defaultSort('status_construction', 'asc')
             ->emptyStateHeading(function () {
                 return auth()->user()->hasRole('super_admin')
                     ? 'Belum Ada Proyek'
@@ -202,7 +207,7 @@ class ConstructionResource extends Resource
                     })
                     ->formatStateUsing(function ($record) {
                         if ($record->status_construction === 'sedang_berlangsung' && $record->end_date < now()) {
-                            return 'Terlambat (Overdue)';
+                            return 'Terlambat';
                         }
 
                         return match ($record->status_construction) {
@@ -229,7 +234,8 @@ class ConstructionResource extends Resource
 
                 TextColumn::make('description')
                     ->label('Deskripsi')
-                    ->limit(40)
+                    ->wrap()
+                    ->limit(20)
                     ->tooltip(fn($state) => strip_tags($state)),
             ])
             ->filters([

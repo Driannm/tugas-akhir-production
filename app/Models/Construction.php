@@ -14,7 +14,7 @@ class Construction extends Model
     use HasFactory;
     public function workers()
     {
-        return $this->hasMany(Worker::class, 'construction_id');
+        return $this->belongsToMany(Worker::class, 'construction_worker');
     }
 
     public function supervisor()
@@ -47,10 +47,10 @@ class Construction extends Model
         return $this->hasManyThrough(
             MaterialRequestItem::class,
             MaterialRequest::class,
-            'construction_id',    
+            'construction_id',
             'material_request_id',
-            'id',                 
-            'id'                  
+            'id',
+            'id'
         );
     }
 
@@ -72,10 +72,10 @@ class Construction extends Model
         return $this->hasManyThrough(
             \App\Models\EquipmentRequestItem::class,
             \App\Models\EquipmentRequest::class,
-            'construction_id',      
-            'equipment_request_id',  
-            'id',                    
-            'id'                     
+            'construction_id',
+            'equipment_request_id',
+            'id',
+            'id'
         );
     }
 
@@ -122,15 +122,4 @@ class Construction extends Model
         'start_date' => 'datetime',
         'end_date' => 'datetime',
     ];
-
-    public static function getEloquentQuery(): Builder
-    {
-        $query = parent::getEloquentQuery();
-
-        if (auth()->user()?->hasRole('Supervisor')) {
-            $query->where('supervisor_id', auth()->id());
-        }
-
-        return $query;
-    }
 }
