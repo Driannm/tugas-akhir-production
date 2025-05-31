@@ -155,9 +155,15 @@ class EquipmentRequestResource extends Resource
                     ->label('Status')
                     ->getStateUsing(fn($record) => $record->overall_status)
                     ->formatStateUsing(fn($state) => match ($state) {
-                        'pending' => 'Menunggu',
+                        'pending' => 'Menunggu Persetujuan',
                         'approved' => 'Disetujui',
                         'rejected' => 'Ditolak',
+                    })
+                    ->icon(fn(string $state): ?string => match (strtolower($state)) {
+                        'approved' => 'heroicon-m-check-circle',
+                        'pending' => 'heroicon-m-exclamation-circle',
+                        'rejected' => 'heroicon-m-x-circle',
+                        default => null,
                     })
                     ->colors([
                         'warning' => 'pending',

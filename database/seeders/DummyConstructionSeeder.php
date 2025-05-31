@@ -23,8 +23,28 @@ class DummyConstructionSeeder extends Seeder
             'Renovasi Rumah',
         ];
 
+        $locations = [
+            'Tegal Kota',
+            'Slawi',
+            'Adiwerna',
+            'Dukuhturi',
+            'Talang',
+            'Margadana',
+            'Pangkah',
+            'Kramat',
+            'Lebaksiu',
+            'Tarub',
+            'Dukuhwaru'
+        ];
+
         $clients = [
-            'Bapak Andi', 'Ibu Sari', 'CV Bangun Jaya', 'PT Rumah Idaman', 'Developer Properti Sejahtera', 'Keluarga Budi', 'Ibu Lestari',
+            'Bapak Andi',
+            'Ibu Sari',
+            'CV Bangun Jaya',
+            'PT Rumah Idaman',
+            'Developer Properti Sejahtera',
+            'Keluarga Budi',
+            'Ibu Lestari',
         ];
 
         $projectData = [
@@ -108,7 +128,7 @@ class DummyConstructionSeeder extends Seeder
                 'start_date' => $start,
                 'end_date' => $end,
                 'status_construction' => $status,
-                'location' => null,
+                'location' => Arr::random($locations),
                 'budget' => rand(500, 3000) * 1000000, // 500 juta - 3 M
                 'client_name' => Arr::random($clients),
                 'supervisor_id' => count($supervisors) > 0 ? Arr::random($supervisors) : null,

@@ -37,15 +37,17 @@ class MaterialRequestResource extends Resource
             ->schema([
                 Select::make('construction_id')
                     ->label('Proyek')
+                    ->placeholder('Pilih proyek...')
                     ->native(false)
-                    ->relationship('construction', 'construction_name')
+                    ->options(
+                        fn() =>
+                        Construction::where('supervisor_id', auth()->id())
+                            ->where('status_construction', '!=', 'selesai')
+                            ->pluck('construction_name', 'id')
+                    )
                     ->required()
-                    ->options(fn() => auth()->user()->is_admin == 1
-                        ? Construction::where('supervisor_id', auth()->id())->pluck('construction_name', 'id')
-                        : Construction::pluck('construction_name', 'id'))
-                    ->placeholder('Pilih proyek yang sesuai')
-                    ->searchable()
-                    ->hint('Pilih proyek tempat material akan digunakan.'),
+                    ->hint('Pilih proyek tempat material akan digunakan.')
+                    ->searchable(),
 
                 Textarea::make('notes')
                     ->label('Catatan Tambahan')
@@ -118,6 +120,8 @@ class MaterialRequestResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->defaultPaginationPageOption(10)
+            ->paginationPageOptions([10, 25, 50])
             ->emptyStateHeading(function () {
                 // Periksa peran pengguna menggunakan Spatie Roles
                 return auth()->user()->hasRole('super_admin')
@@ -150,6 +154,7 @@ class MaterialRequestResource extends Resource
                 TextColumn::make('overall_status')
                     ->label('Status')
                     ->badge()
+                    ->sortable()
                     ->color(fn(string $state): string => match (strtolower($state)) {
                         'pending' => 'warning',
                         'approved' => 'success',

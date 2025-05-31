@@ -178,6 +178,7 @@ class ConstructionResource extends Resource
                 TextColumn::make('construction_name')
                     ->label('Nama Proyek')
                     ->searchable()
+                    ->wrap()
                     ->sortable(),
 
                 TextColumn::make('status_construction')
@@ -185,7 +186,7 @@ class ConstructionResource extends Resource
                     ->badge()
                     ->color(function ($record) {
                         if ($record->status_construction === 'sedang_berlangsung' && $record->end_date < now()) {
-                            return 'danger'; // Overdue -> merah
+                            return 'danger';
                         }
 
                         return match ($record->status_construction) {
@@ -235,8 +236,21 @@ class ConstructionResource extends Resource
                 TextColumn::make('description')
                     ->label('Deskripsi')
                     ->wrap()
+                    ->toggleable(isToggledHiddenByDefault: true)
                     ->limit(20)
                     ->tooltip(fn($state) => strip_tags($state)),
+
+                TextColumn::make('supervisor.name')
+                    ->label('Supervisor')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable()
+                    ->limit(30),
+
+                    TextColumn::make('type_of_construction')
+                    ->label('Jenis Konstruksi')
+                    ->toggleable(isToggledHiddenByDefault: true)
+                    ->searchable()
+                    ->limit(30),
             ])
             ->filters([
                 SelectFilter::make('status_construction')

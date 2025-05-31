@@ -48,7 +48,7 @@ class EquipmentRelationManager extends RelationManager
                     ->label('Status')
                     ->searchable()
                     ->formatStateUsing(fn($state) => match ($state) {
-                        'pending' => 'Menunggu',
+                        'pending' => 'Menunggu Persetujuan',
                         'approved' => 'Disetujui',
                         'rejected' => 'Ditolak',
                         default => ucfirst($state),

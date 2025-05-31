@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use App\Observers\ProjectAssignObserver;
 
-#[ObservedBy(ProjectAssignObserver::class)]
+//#[ObservedBy(ProjectAssignObserver::class)]
 class Construction extends Model
 {
     use HasFactory;
