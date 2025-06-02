@@ -1,331 +1,392 @@
-@extends('app')
+<!DOCTYPE html>
+<html lang="id">
 
-@section('content')
-    <!-- Header with Navigation -->
-    <header class="bg-white shadow-sm dark:bg-gray-800 sticky top-0 z-50">
-        <nav class="px-4 lg:px-6 py-3 max-w-7xl mx-auto">
-            <div class="flex justify-between items-center">
-                <a href="/" class="flex items-center space-x-3">
-                    <img src="{{ asset('images/logo/logo.png') }}" class="h-8 sm:h-10" alt="Ajuna Logo" />
-                    <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Ajuna Property</span>
-                </a>
-                <div class="hidden md:flex items-center space-x-8">
-                    <a href="#features"
-                        class="text-gray-700 hover:text-yellow-400 dark:text-gray-300 dark:hover:text-white transition">Fitur</a>
-                    <a href="#benefits"
-                        class="text-gray-700 hover:text-yellow-400 dark:text-gray-300 dark:hover:text-white transition">Keunggulan</a>
-                    <a href="#testimonials"
-                        class="text-gray-700 hover:text-yellow-400 dark:text-gray-300 dark:hover:text-white transition">Testimoni</a>
-                    <a href="/main/login"
-                        class="px-4 py-2 bg-yellow-400 text-gray-900 rounded-lg font-medium hover:bg-yellow-500 transition">Masuk</a>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Informasi Manajemen Proyek - PT Arjuna Lingga Property</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hover-scale {
+            transition: all 0.3s ease;
+        }
+
+        .hover-scale:hover {
+            transform: scale(1.05);
+        }
+
+        .animate-float {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        .building-icon {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.7;
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen gradient-bg">
+    <!-- Header -->
+    <header class="w-full py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-white p-2 rounded-lg shadow-lg">
+                    <i class="fas fa-building text-2xl text-blue-600"></i>
                 </div>
-                <button class="md:hidden text-gray-700 dark:text-gray-300">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
-                        </path>
-                    </svg>
-                </button>
+                <div class="text-white">
+                    <h1 class="text-xl font-bold">PT Arjuna Lingga Property</h1>
+                    <p class="text-sm opacity-90">Project Management System</p>
+                </div>
             </div>
-        </nav>
+            <div class="text-white text-right">
+                <p class="text-sm opacity-90">Internal Access Only</p>
+                <p class="text-xs opacity-75" id="currentTime"></p>
+            </div>
+        </div>
     </header>
 
-    <!-- Hero Section with Image -->
-    <section class="bg-white dark:bg-gray-900">
-        <div class="max-w-7xl mx-auto px-4 py-12 md:py-24 lg:flex lg:items-center lg:gap-12">
-            <div class="lg:w-1/2">
-                <div class="inline-flex items-center px-4 py-2 mb-6 bg-yellow-50 rounded-full dark:bg-gray-800">
-                    <span class="text-sm font-medium text-yellow-600 dark:text-yellow-400">
-                        Selamat Datang di Sistem Management Proyek
-                    </span>
-                </div>
-
-                <h1
-                    class="mb-6 text-4xl font-extrabold tracking-tight leading-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
-                    Bangun Masa Depan Properti dengan Sistem Terintegrasi
-                </h1>
-
-                <p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl dark:text-gray-400">
-                    Di Ajuna Property, kami menghadirkan solusi inovatif dalam pengelolaan proyek properti. Dengan teknologi
-                    dan strategi terbaik, kami memastikan setiap proyek berjalan efisien, transparan, dan bernilai tinggi
-                    bagi semua pemangku kepentingan.
-                </p>
-
-                <div class="flex flex-col sm:flex-row gap-4">
-                    <a href="/main/login"
-                        class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 bg-yellow-400 rounded-lg hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 dark:focus:ring-yellow-900 transition">
-                        Masuk Sistem
-                        <svg class="ml-2 -mr-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd"
-                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                clip-rule="evenodd"></path>
-                        </svg>
-                    </a>
-                    <a href="#contact"
-                        class="inline-flex items-center justify-center px-5 py-3 text-base font-medium text-center text-gray-900 border border-gray-300 rounded-lg hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 dark:text-white dark:border-gray-700 dark:hover:bg-gray-700 dark:focus:ring-gray-800 transition">
-                        Hubungi Kami
-                    </a>
-                </div>
-            </div>
-            <div class="lg:w-1/2 mt-12 lg:mt-0">
-                <img src="{{ asset('images/hero-image.png') }}" alt="Property Management Dashboard"
-                    class="w-full rounded-xl shadow-xl dark:shadow-gray-800/50">
-            </div>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section id="features" class="bg-gray-50 dark:bg-gray-800 py-16">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
-                    Fitur Unggulan Sistem Kami
-                </h2>
-                <p class="mt-4 max-w-2xl text-xl text-gray-500 dark:text-gray-400 mx-auto">
-                    Solusi komprehensif untuk manajemen proyek properti Anda
-                </p>
-            </div>
-
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
-                    <div
-                        class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 dark:bg-yellow-900/30">
-                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2">
-                            </path>
-                        </svg>
+    <!-- Main Content -->
+    <main class="flex-1 flex items-center justify-center px-6 py-12">
+        <div class="max-w-4xl mx-auto text-center">
+            <!-- Welcome Card -->
+            <div class="glass-effect rounded-3xl p-8 md:p-12 mb-8 hover-scale">
+                <div class="mb-8">
+                    <div class="inline-block p-4 bg-white rounded-full shadow-xl mb-6 animate-float">
+                        <i class="fas fa-hard-hat text-4xl text-blue-600 building-icon"></i>
                     </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Manajemen Proyek Terpusat</h3>
-                    <p class="text-gray-600 dark:text-gray-400">
-                        Pantau seluruh proyek properti Anda dalam satu dashboard terintegrasi dengan timeline dan progress
-                        yang real-time.
-                    </p>
-                </div>
-
-                <!-- Feature 2 -->
-                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
-                    <div
-                        class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 dark:bg-yellow-900/30">
-                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Penjadwalan Otomatis</h3>
-                    <p class="text-gray-600 dark:text-gray-400">
-                        Sistem penjadwalan cerdas yang membantu Anda mengoptimalkan alokasi sumber daya dan memenuhi tenggat
-                        waktu.
-                    </p>
-                </div>
-
-                <!-- Feature 3 -->
-                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
-                    <div
-                        class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 dark:bg-yellow-900/30">
-                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z">
-                            </path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Analisis Risiko</h3>
-                    <p class="text-gray-600 dark:text-gray-400">
-                        Identifikasi potensi risiko proyek secara dini dengan alat analisis prediktif kami untuk mitigasi
-                        yang lebih baik.
-                    </p>
-                </div>
-
-                <!-- Feature 4 -->
-                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
-                    <div
-                        class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 dark:bg-yellow-900/30">
-                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
-                            </path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Manajemen Anggaran</h3>
-                    <p class="text-gray-600 dark:text-gray-400">
-                        Pantau pengeluaran proyek secara real-time dengan alat pelacakan anggaran yang akurat dan
-                        terperinci.
-                    </p>
-                </div>
-
-                <!-- Feature 5 -->
-                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
-                    <div
-                        class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 dark:bg-yellow-900/30">
-                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z">
-                            </path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Kolaborasi Tim</h3>
-                    <p class="text-gray-600 dark:text-gray-400">
-                        Platform komunikasi terintegrasi untuk seluruh tim, kontraktor, dan pemangku kepentingan proyek.
-                    </p>
-                </div>
-
-                <!-- Feature 6 -->
-                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
-                    <div
-                        class="w-12 h-12 bg-yellow-100 rounded-lg flex items-center justify-center mb-4 dark:bg-yellow-900/30">
-                        <svg class="w-6 h-6 text-yellow-600 dark:text-yellow-400" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z">
-                            </path>
-                        </svg>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Laporan Otomatis</h3>
-                    <p class="text-gray-600 dark:text-gray-400">
-                        Hasilkan laporan proyek profesional secara otomatis dengan berbagai template yang dapat disesuaikan.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Benefits Section -->
-    <section id="benefits" class="bg-white dark:bg-gray-900 py-16">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="lg:flex lg:items-center lg:gap-12">
-                <div class="lg:w-1/2 mb-12 lg:mb-0">
-                    <img src="{{ asset('images/benefits-image.png') }}" alt="Project Management Benefits"
-                        class="w-full rounded-xl shadow-xl dark:shadow-gray-800/50">
-                </div>
-                <div class="lg:w-1/2">
-                    <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl mb-6">
-                        Keunggulan Menggunakan Sistem Kami
+                    <h2 id="welcomeTitle" class="text-4xl md:text-5xl font-bold text-white mb-4">
+                        Selamat Datang
                     </h2>
+                    <p class="text-xl text-white opacity-90 mb-6">
+                        Sistem Informasi Manajemen Proyek Konstruksi
+                    </p>
+                    <div class="bg-white bg-opacity-20 rounded-full px-6 py-2 inline-block">
+                        <p id="companyName" class="text-white font-medium">PT Arjuna Lingga Property</p>
+                    </div>
+                </div>
 
-                    <div class="space-y-6">
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <div
-                                    class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400">
-                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Efisiensi Waktu 40% Lebih
-                                    Baik</h3>
-                                <p class="mt-1 text-gray-600 dark:text-gray-400">
-                                    Otomatisasi proses manual mengurangi waktu administrasi hingga 40%, memungkinkan fokus
-                                    pada aspek strategis proyek.
-                                </p>
-                            </div>
+                <!-- Action Buttons -->
+                <div id="actionButtons" class="grid md:grid-cols-2 gap-4 mb-8">
+                    <button id="loginBtn"
+                        class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-4 px-6 rounded-xl shadow-lg hover-scale transition-all duration-300 group">
+                        <div class="flex items-center justify-center space-x-3">
+                            <i class="fas fa-sign-in-alt text-blue-600 group-hover:scale-110 transition-transform"></i>
+                            <span>Masuk ke Sistem</span>
                         </div>
+                    </button>
+                    <button id="guideBtn"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover-scale transition-all duration-300 group">
+                        <div class="flex items-center justify-center space-x-3">
+                            <i class="fas fa-book text-white group-hover:scale-110 transition-transform"></i>
+                            <span>Panduan Sistem</span>
+                        </div>
+                    </button>
+                </div>
 
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <div
-                                    class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400">
-                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Pengurangan Biaya Tak Terduga
-                                </h3>
-                                <p class="mt-1 text-gray-600 dark:text-gray-400">
-                                    Sistem prediktif kami membantu mengidentifikasi potensi pembengkakan biaya sebelum
-                                    terjadi, menghemat hingga 15% anggaran proyek.
-                                </p>
-                            </div>
+                <!-- User Logged In Buttons (Hidden by default) -->
+                <div id="userButtons" class="grid md:grid-cols-3 gap-4 mb-8 hidden">
+                    <button id="dashboardBtn"
+                        class="bg-white hover:bg-gray-50 text-gray-800 font-semibold py-4 px-6 rounded-xl shadow-lg hover-scale transition-all duration-300 group">
+                        <div class="flex items-center justify-center space-x-3">
+                            <i
+                                class="fas fa-tachometer-alt text-blue-600 group-hover:scale-110 transition-transform"></i>
+                            <span>Dashboard</span>
                         </div>
+                    </button>
+                    <button id="projectsBtn"
+                        class="bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover-scale transition-all duration-300 group">
+                        <div class="flex items-center justify-center space-x-3">
+                            <i class="fas fa-project-diagram text-white group-hover:scale-110 transition-transform"></i>
+                            <span>Kelola Proyek</span>
+                        </div>
+                    </button>
+                    <button id="logoutBtn"
+                        class="bg-red-600 hover:bg-red-700 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover-scale transition-all duration-300 group">
+                        <div class="flex items-center justify-center space-x-3">
+                            <i class="fas fa-sign-out-alt text-white group-hover:scale-110 transition-transform"></i>
+                            <span>Keluar</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
 
-                        <div class="flex">
-                            <div class="flex-shrink-0">
-                                <div
-                                    class="flex items-center justify-center h-8 w-8 rounded-full bg-yellow-100 text-yellow-600 dark:bg-yellow-900/30 dark:text-yellow-400">
-                                    <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M5
-                                                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d=" M5 13l4 4L19 7"></path>
-                                    </svg>
-                                </div>
-                            </div>
-                            <div class="ml-4">
-                                <h3 class="text-lg font-medium text-gray-900 dark:text-white">Peningkatan Transparansi
-                                    Proyek</h3>
-                                <p class="mt-1 text-gray-600 dark:text-gray-400">
-                                    Semua data proyek dapat diakses secara real-time oleh pemangku kepentingan, meningkatkan
-                                    komunikasi dan pengambilan keputusan.
-                                </p>
-                            </div>
-                        </div>
+            <!-- Feature Cards -->
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="glass-effect rounded-2xl p-6 hover-scale group">
+                    <div
+                        class="bg-green-500 w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
+                        <i class="fas fa-tasks text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Manajemen Proyek</h3>
+                    <p class="text-white opacity-80 text-sm">Kelola proyek konstruksi dengan efisien dan terorganisir
+                    </p>
+                </div>
+
+                <div class="glass-effect rounded-2xl p-6 hover-scale group">
+                    <div
+                        class="bg-orange-500 w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
+                        <i class="fas fa-chart-line text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Monitoring Progress</h3>
+                    <p class="text-white opacity-80 text-sm">Pantau kemajuan proyek secara real-time</p>
+                </div>
+
+                <div class="glass-effect rounded-2xl p-6 hover-scale group">
+                    <div
+                        class="bg-purple-500 w-12 h-12 rounded-full flex items-center justify-center mb-4 mx-auto group-hover:scale-110 transition-transform">
+                        <i class="fas fa-users text-white"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2">Kolaborasi Tim</h3>
+                    <p class="text-white opacity-80 text-sm">Koordinasi tim yang lebih baik dan efektif</p>
+                </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="mt-12 glass-effect rounded-2xl p-6">
+                <h3 class="text-2xl font-bold text-white mb-6">Status Sistem</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-green-400">24</div>
+                        <div class="text-white opacity-80 text-sm">Proyek Aktif</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-blue-400">156</div>
+                        <div class="text-white opacity-80 text-sm">Task Selesai</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-yellow-400">8</div>
+                        <div class="text-white opacity-80 text-sm">Tim Aktif</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl font-bold text-purple-400">98%</div>
+                        <div class="text-white opacity-80 text-sm">Sistem Uptime</div>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </main>
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="bg-gray-50 dark:bg-gray-800 py-16">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <h2 class="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl mb-12">
-                Apa Kata Mereka
-            </h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">
-                        "Sistem Ajuna Property sangat membantu kami dalam mengelola proyek dengan lebih efisien dan tepat
-                        waktu."
-                    </p>
-                    <div class="flex items-center justify-center space-x-4">
-                        <img src="{{ asset('images/testimonials/user1.jpg') }}" alt="User 1"
-                            class="w-12 h-12 rounded-full object-cover">
-                        <div class="text-left">
-                            <p class="text-gray-900 dark:text-white font-bold">Budi Santoso</p>
-                            <p class="text-yellow-400">Manajer Proyek</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">
-                        "Fitur penjadwalan otomatis dan pelaporan membuat pekerjaan kami jadi lebih mudah dan terstruktur."
-                    </p>
-                    <div class="flex items-center justify-center space-x-4">
-                        <img src="{{ asset('images/testimonials/user2.jpg') }}" alt="User 2"
-                            class="w-12 h-12 rounded-full object-cover">
-                        <div class="text-left">
-                            <p class="text-gray-900 dark:text-white font-bold">Sari Dewi</p>
-                            <p class="text-yellow-400">Kepala Keuangan</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md dark:bg-gray-700 transition hover:shadow-lg">
-                    <p class="text-gray-600 dark:text-gray-400 mb-4">
-                        "Kolaborasi tim jadi seamless berkat platform ini. Sangat direkomendasikan!"
-                    </p>
-                    <div class="flex items-center justify-center space-x-4">
-                        <img src="{{ asset('images/testimonials/user3.jpg') }}" alt="User 3"
-                            class="w-12 h-12 rounded-full object-cover">
-                        <div class="text-left">
-                            <p class="text-gray-900 dark:text-white font-bold">Agus Rahman</p>
-                            <p class="text-yellow-400">Kontraktor</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <!-- Footer -->
+    <footer class="w-full py-6 px-6 mt-12">
+        <div class="max-w-7xl mx-auto text-center text-white opacity-80">
+            <p class="text-sm">© 2025 PT Arjuna Lingga Property - Sistem Manajemen Proyek Konstruksi</p>
+            <p class="text-xs mt-1">Akses terbatas untuk karyawan internal</p>
         </div>
-    </section>
+    </footer>
 
-    
-@endsection
+    <script>
+        // Simulate user login status
+        let isLoggedIn = false;
+        let currentUser = null;
+
+        // Check if user is already logged in (from localStorage)
+        function checkLoginStatus() {
+            const userData = localStorage.getItem('currentUser');
+            if (userData) {
+                isLoggedIn = true;
+                currentUser = JSON.parse(userData);
+                updateUIForLoggedInUser();
+            }
+        }
+
+        // Update UI when user is logged in
+        function updateUIForLoggedInUser() {
+            document.getElementById('actionButtons').classList.add('hidden');
+            document.getElementById('userButtons').classList.remove('hidden');
+
+            // Update welcome message
+            document.getElementById('welcomeTitle').textContent = `Selamat Datang, ${currentUser.name}`;
+            document.getElementById('companyName').textContent = `${currentUser.department} - PT Arjuna Lingga Property`;
+        }
+
+        // Update UI when user logs out
+        function updateUIForLoggedOutUser() {
+            document.getElementById('actionButtons').classList.remove('hidden');
+            document.getElementById('userButtons').classList.add('hidden');
+
+            // Reset welcome message
+            document.getElementById('welcomeTitle').textContent = 'Selamat Datang';
+            document.getElementById('companyName').textContent = 'PT Arjuna Lingga Property';
+        }
+
+        // Simulate login process
+        function simulateLogin() {
+            // Simulate API call delay
+            const loginBtn = document.getElementById('loginBtn');
+            const originalText = loginBtn.querySelector('span').textContent;
+            loginBtn.querySelector('span').textContent = 'Memproses...';
+            loginBtn.disabled = true;
+
+            setTimeout(() => {
+                // Simulate successful login
+                currentUser = {
+                    id: 1,
+                    name: 'John Doe',
+                    department: 'Tim Konstruksi',
+                    role: 'Project Manager'
+                };
+
+                isLoggedIn = true;
+                localStorage.setItem('currentUser', JSON.stringify(currentUser));
+                updateUIForLoggedInUser();
+
+                // Show success message
+                showNotification('Login berhasil! Selamat datang di sistem.', 'success');
+
+                loginBtn.querySelector('span').textContent = originalText;
+                loginBtn.disabled = false;
+            }, 1500);
+        }
+
+        // Logout function
+        function logout() {
+            isLoggedIn = false;
+            currentUser = null;
+            localStorage.removeItem('currentUser');
+            updateUIForLoggedOutUser();
+            showNotification('Anda telah keluar dari sistem.', 'info');
+        }
+
+        // Show notification
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className =
+                `fixed top-4 right-4 z-50 p-4 rounded-lg shadow-lg transition-all duration-300 transform translate-x-full`;
+
+            switch (type) {
+                case 'success':
+                    notification.classList.add('bg-green-500', 'text-white');
+                    break;
+                case 'error':
+                    notification.classList.add('bg-red-500', 'text-white');
+                    break;
+                default:
+                    notification.classList.add('bg-blue-500', 'text-white');
+            }
+
+            notification.innerHTML = `
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-info-circle"></i>
+                    <span>${message}</span>
+                </div>
+            `;
+
+            document.body.appendChild(notification);
+
+            // Animate in
+            setTimeout(() => {
+                notification.classList.remove('translate-x-full');
+            }, 100);
+
+            // Remove after 3 seconds
+            setTimeout(() => {
+                notification.classList.add('translate-x-full');
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 3000);
+        }
+
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('id-ID', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+            document.getElementById('currentTime').textContent = timeString;
+        }
+
+        // Initialize
+        updateTime();
+        setInterval(updateTime, 60000);
+        checkLoginStatus();
+
+        // Event listeners for buttons
+        document.getElementById('loginBtn').addEventListener('click', function() {
+            // In real implementation, this would redirect to /main/login
+            // For demo purposes, we'll simulate login
+            if (confirm('Redirect ke halaman login? (Demo: klik OK untuk simulasi login)')) {
+                window.location.href = '/main/login';
+            }
+        });
+
+        document.getElementById('guideBtn').addEventListener('click', function() {
+            showNotification('Fitur panduan sistem akan segera tersedia.', 'info');
+        });
+
+        // Event listeners for logged-in user buttons
+        document.getElementById('dashboardBtn').addEventListener('click', function() {
+            showNotification('Mengalihkan ke dashboard...', 'info');
+            // window.location.href = '/main/dashboard'; // Real implementation
+        });
+
+        document.getElementById('projectsBtn').addEventListener('click', function() {
+            showNotification('Mengalihkan ke halaman proyek...', 'info');
+            // window.location.href = '/main/projects'; // Real implementation
+        });
+
+        document.getElementById('logoutBtn').addEventListener('click', function() {
+            if (confirm('Yakin ingin keluar dari sistem?')) {
+                logout();
+            }
+        });
+
+        // Add click effect to all buttons
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+    </script>
+</body>
+
+</html>
